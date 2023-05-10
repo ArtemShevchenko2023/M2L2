@@ -1,4 +1,5 @@
 import discord
+import os
 from discord.ext import commands
 from SETLogic import *
 intents = discord.Intents.default()
@@ -25,10 +26,17 @@ async def stat(ctx):
     await ctx.send("*В России ко 2 половине 2010-х было накоплено 30 млрд тонн мусора! Но сейчас уже начали понимать эту проблему и разрабатывать решение. Ты тоже можешь помочь экологии, а я и Интернет подскажем как и зачем.*")
 @bot.command()
 async def helpe(ctx):
-    helping = ("Приветствие: ^hello\nИнформация с маленькой интсрукцией обо мне: ^info\nО переработке материалов: ^material\nО том как ты можешь помочь экологии: ^youcan\nКоличество тонн мусора в России: ^stat\nМои команды: ^helpe\nЭкология на дороге: ^road")
+    helping = ("Приветствие: ^hello\nИнформация с маленькой интсрукцией обо мне: ^info\nО переработке материалов: ^material\nО том как ты можешь помочь экологии: ^youcan\nКоличество тонн мусора в России: ^stat\nМои команды: ^helpe\nЭкология на дороге: ^road\nЭкологический мем: ^memasik")
     await ctx.send(f'*Мои команды:\n{helping}*')
 @bot.command()
 async def road(ctx):
     await ctx.send(f'{inroad()}')
-
+@bot.command()
+async def memasik(ctx):
+    img_name = os.listdir('eco_memasiki')
+    img_names = random.choice(img_name)
+    # А вот так можно подставить имя файла из переменной!
+    with open(f'eco_memasiki/{img_names}', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
 bot.run("Секретный токен")
